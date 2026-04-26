@@ -1,0 +1,31 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test artifacts
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Build output
+bin/
+dist/
+
+# Profiling output (you'll generate these in Phase 10)
+*.prof
+*.pprof
+cpu.out
+mem.out
