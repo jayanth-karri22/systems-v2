@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"log"
 	"net"
 )
@@ -15,20 +16,20 @@ func main() {
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("accept: %v", err)
+			continue
 		}
+
 		go handleConn(conn)
 	}
 }
 
 func handleConn(conn net.Conn) {
-	defer conn.Close()
-	buf := make([]byte, 1024)
-	for {
-		n, err := conn.Read(buf)
-		if err != nil {
-			return
-		}
-		conn.Write(buf[:n])
+	scanner := bufio.NewScanner(conn)
+
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		conn.Write([]byte(line + "\n"))
 	}
 }
